@@ -3,14 +3,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../../dbconfig");
 const { UserInputError } = require("apollo-server");
-const validateRegisterInputs = require("../../Utils/validation");
-const validateLoginInputs = require("../../Utils/validation");
+const validateRegisterInputs = require("../../Utils/RegisterValidation");
+const validateLoginInputs = require("../../Utils/LoginValidation");
 
 module.exports = {
   Mutation: {
     register: async (
       _,
-      { registerInput: { username, email, password, confirmPassword } } = args, //multilevel descruturing args
+      { registerInput: { username, email, password, confirmPassword } } = args, //multilevel descruturing args learn more here : https://stackoverflow.com/questions/50999968/es6-double-destructure/50999990
       context,
       info
     ) => {

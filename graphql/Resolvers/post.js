@@ -8,6 +8,11 @@ module.exports = {
       } catch (err) {
         console.log(err);
       }
+    },
+    //for single post
+    getPost: async (_, { postId }) => {
+      const post = await Post.findById(postId);
+      return post;
     }
   }
 };
