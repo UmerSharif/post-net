@@ -48,6 +48,7 @@ module.exports = {
       });
       const res = await newUser.save();
       // res token for registeration
+      //FIXME: refactoring token , write a common function
       const token = jwt.sign(
         {
           id: res.id,
@@ -94,6 +95,7 @@ module.exports = {
         });
       }
       //user token for login
+      //FIXME: refactoring token , write a common function
       const token = jwt.sign(
         {
           id: user.id,
