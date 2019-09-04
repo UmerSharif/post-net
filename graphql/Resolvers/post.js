@@ -1,6 +1,7 @@
 const Post = require("../../models/Post");
 const isAuth = require("../../Utils/is-auth");
 const { AuthenticationError } = require("apollo-server");
+const { UserInputError } = require("apollo-server");
 module.exports = {
   Query: {
     getPosts: async () => {
@@ -63,6 +64,39 @@ module.exports = {
         }
       } catch (err) {
         throw new Error(err);
+      }
+    },
+    //Likes post mutation
+    likePost: async (_, { postId }, context) => {
+      const user = isAuth(context);
+      if (!user) {
+        throw new Error("Authentication failed...!");
+      }
+      const post = await Post.findById(postId);
+
+      if (post) {
+        if (post.likes.find(like => like.username === user.username)) {
+          //likes also stores the user information who liked the post
+          // we check here if the loged in user is the same as the one who liked the post
+          //if true means that the user has already liked the post
+          //now unlike the post if already liked
+          // logic for unlike
+          post.likes = post.likes.filter(
+            like => like.username !== user.username
+          );
+          await post.save();
+          return post;
+        } else {
+          //add the new like to post.likes array if its not liked
+          post.likes.push({
+            username: user.username,
+            createdAt: new Date().toISOString()
+          });
+          await post.save();
+          return post;
+        }
+      } else {
+        throw new UserInputError("Post does not exist..!");
       }
     }
   }

@@ -34,6 +34,7 @@ module.exports = {
       const user = isAuth(context);
       const post = await Post.findById(postId);
       if (post) {
+        //if post exist find the find the index of the comment whose id is passed in the arguments
         const commentIndex = post.comments.findIndex(
           comment => comment.id === commentId
         );
