@@ -3,6 +3,16 @@ const userResolver = require("./user");
 const commentResolver = require("./comment");
 
 module.exports = {
+  Post: {
+    // calculate counts for like and posts on the server
+    likeCount: parent => {
+      return parent.likes.length;
+    },
+    commentCount: parent => {
+      return parent.comments.length;
+    }
+    // calculate counts for like and posts on the server
+  },
   Query: {
     ...postResolver.Query
   },

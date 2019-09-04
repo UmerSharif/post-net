@@ -79,7 +79,7 @@ module.exports = {
           //likes also stores the user information who liked the post
           // we check here if the loged in user is the same as the one who liked the post
           //if true means that the user has already liked the post
-          //now unlike the post if already liked
+          //now unlike the post if already liked (the logic for likes work as toggle)
           // logic for unlike
           post.likes = post.likes.filter(
             like => like.username !== user.username
