@@ -32,7 +32,7 @@ module.exports = {
       if (!user) {
         throw new Error("Authorization Failed...!");
       }
-      if (args.body.trim() === "") {
+      if (body.trim() === "") {
         throw new Error("Post body must not be empty..!");
       }
       const newPost = new Post({
