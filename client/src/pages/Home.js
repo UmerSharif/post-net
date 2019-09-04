@@ -3,16 +3,16 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Grid } from "semantic-ui-react";
 import PostCard from "../components/PostCard";
+import "./Home.css";
 
 export default function Home() {
   const {
     loading,
     data: { getPosts: posts }
   } = useQuery(FETCH_POSTS_QUERY); //multilevel destructuring , posts is an alias
-  console.log(posts);
   return (
     <Grid columns={3} divided>
-      <Grid.Row>
+      <Grid.Row className="home-title">
         <h2>Recents posts</h2>
       </Grid.Row>
       <Grid.Row>
