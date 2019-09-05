@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -10,17 +10,24 @@ import NavBar from "./components/NavBar";
 import "semantic-ui-css/semantic.min.css";
 import { Container } from "semantic-ui-react";
 import "./App.css";
+import AuthContext from "./context/AuthContext";
 
 function App() {
+  const [state, setState] = useState("");
+  const loginUser = data => {
+    setState({ ...state, state: data });
+  };
   return (
-    <Router>
-      <Container>
-        <NavBar></NavBar>
-        <Route exact path="/" component={Home}></Route>
-        <Route exact path="/login" component={Login}></Route>
-        <Route exact path="/register" component={Register}></Route>
-      </Container>
-    </Router>
+    <AuthContext.Provider value={{ user: state, login: loginUser }}>
+      <Router>
+        <Container>
+          <NavBar></NavBar>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/register" component={Register}></Route>
+        </Container>
+      </Router>
+    </AuthContext.Provider>
   );
 }
 
