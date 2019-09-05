@@ -15,15 +15,11 @@ export default function Login(props) {
 
   const context = useContext(AuthContext);
 
-  // const [Values, setValues] = useState(initialValues);
   const { onChange, onSubmit, Values } = useFormHook(
     forLoginUser,
     initialValues
   );
   const [errors, setErrors] = useState({});
-  // const onChange = e => {
-  //   setValues({ ...Values, [e.target.name]: e.target.value });
-  // };
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(
@@ -44,11 +40,6 @@ export default function Login(props) {
   function forLoginUser() {
     loginUser();
   }
-
-  // const onSubmit = e => {
-  //   e.preventDefault();
-  //   loginUser();
-  // };
 
   return (
     <div className="register-container">

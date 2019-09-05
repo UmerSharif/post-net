@@ -15,12 +15,9 @@ export default function Register(props) {
     confirmPassword: "",
     email: ""
   };
-  // const [Values, setValues] = useState(initialValues); // in customform hook now
+
   const { onChange, onSubmit, Values } = useFormHook(forAddUser, initialValues);
   const [errors, setErrors] = useState({});
-  // const onChange = e => { // in customform hook now
-  //   setValues({ ...Values, [e.target.name]: e.target.value });
-  // };
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
@@ -35,11 +32,6 @@ export default function Register(props) {
   function forAddUser() {
     addUser();
   }
-
-  // const onSubmit = e => { // in customform hook now
-  //   e.preventDefault();
-  //   addUser();
-  // };
 
   return (
     <div className="register-container">
