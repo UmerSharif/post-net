@@ -5,6 +5,9 @@ import "./Register.css";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 
+//custom hooks
+import { useFormHook } from "../utils/FormHook";
+
 export default function Register(props) {
   let initialValues = {
     username: "",
@@ -12,11 +15,12 @@ export default function Register(props) {
     confirmPassword: "",
     email: ""
   };
-  const [Values, setValues] = useState(initialValues);
+  // const [Values, setValues] = useState(initialValues); // in customform hook now
+  const { onChange, onSubmit, Values } = useFormHook(forAddUser, initialValues);
   const [errors, setErrors] = useState({});
-  const onChange = e => {
-    setValues({ ...Values, [e.target.name]: e.target.value });
-  };
+  // const onChange = e => { // in customform hook now
+  //   setValues({ ...Values, [e.target.name]: e.target.value });
+  // };
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
@@ -28,10 +32,14 @@ export default function Register(props) {
     variables: Values
   });
 
-  const onSubmit = e => {
-    e.preventDefault();
+  function forAddUser() {
     addUser();
-  };
+  }
+
+  // const onSubmit = e => { // in customform hook now
+  //   e.preventDefault();
+  //   addUser();
+  // };
 
   return (
     <div className="register-container">

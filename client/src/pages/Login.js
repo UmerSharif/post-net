@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Button } from "semantic-ui-react";
 import { useState } from "react";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
+//custom hooks
+import { useFormHook } from "../utils/FormHook";
+import AuthContext from "../context/AuthContext";
 
 //TODO: custom hooks for onchange and on submit
 export default function Login(props) {
@@ -10,14 +13,22 @@ export default function Login(props) {
     username: "",
     password: ""
   };
-  const [Values, setValues] = useState(initialValues);
+
+  const context = useContext(AuthContext);
+
+  // const [Values, setValues] = useState(initialValues);
+  const { onChange, onSubmit, Values } = useFormHook(
+    forLoginUser,
+    initialValues
+  );
   const [errors, setErrors] = useState({});
-  const onChange = e => {
-    setValues({ ...Values, [e.target.name]: e.target.value });
-  };
+  // const onChange = e => {
+  //   setValues({ ...Values, [e.target.name]: e.target.value });
+  // };
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, result) {
+      context.login(result.data.login);
       props.history.push("/");
     },
     onError(err) {
@@ -26,10 +37,14 @@ export default function Login(props) {
     variables: Values
   });
 
-  const onSubmit = e => {
-    e.preventDefault();
+  function forLoginUser() {
     loginUser();
-  };
+  }
+
+  // const onSubmit = e => {
+  //   e.preventDefault();
+  //   loginUser();
+  // };
 
   return (
     <div className="register-container">
