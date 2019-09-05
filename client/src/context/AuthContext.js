@@ -5,5 +5,3 @@ const AuthContext = createContext({
   login: data => {},
   logout: () => {}
 });
-
-export default AuthContext;

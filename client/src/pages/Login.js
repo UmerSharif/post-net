@@ -5,7 +5,7 @@ import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 //custom hooks
 import { useFormHook } from "../utils/FormHook";
-import AuthContext from "../context/AuthContext";
+// import AuthContext from "../context/AuthContext";
 
 export default function Login(props) {
   let initialValues = {
@@ -13,7 +13,7 @@ export default function Login(props) {
     password: ""
   };
 
-  const context = useContext(AuthContext);
+  // const context = useContext(AuthContext);
 
   // const [Values, setValues] = useState(initialValues);
   const { onChange, onSubmit, Values } = useFormHook(
@@ -27,7 +27,7 @@ export default function Login(props) {
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, result) {
-      context.login(result.data.login);
+      // context.login(result.data.login);
       props.history.push("/");
     },
     onError(err) {
