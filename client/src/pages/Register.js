@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Button } from "semantic-ui-react";
 import { useState } from "react";
 import "./Register.css";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
+import { AuthContext } from "../context/AuthContext";
 
 //custom hooks
 import { useFormHook } from "../utils/FormHook";
@@ -15,12 +16,19 @@ export default function Register(props) {
     confirmPassword: "",
     email: ""
   };
+  const context = useContext(AuthContext);
 
   const { onChange, onSubmit, Values } = useFormHook(forAddUser, initialValues);
   const [errors, setErrors] = useState({});
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
-    update(proxy, result) {
+    update(
+      proxy,
+      {
+        data: { register: userData }
+      }
+    ) {
+      context.login(userData);
       props.history.push("/");
     },
     onError(err) {
