@@ -4,7 +4,6 @@ import { useState } from "react";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 
-//TODO: custom hooks for onchange and on submit
 export default function Login(props) {
   let initialValues = {
     username: "",
