@@ -1,0 +1,9 @@
+.post-form-container {
+  width: 60%;
+  margin: 2rem auto;
+  border: 1px solid #efe6e6;
+  padding: 1rem;
+  -webkit-box-shadow: -5px 6px 31px -20px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -5px 6px 31px -20px rgba(0, 0, 0, 0.75);
+  box-shadow: -5px 6px 31px -20px rgba(0, 0, 0, 0.75);
+}
