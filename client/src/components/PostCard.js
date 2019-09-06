@@ -3,6 +3,7 @@ import { Card, Icon, Label, Image, Button } from "semantic-ui-react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import LikeButton from "./LikeButton";
 
 export default function PostCard(props) {
   const { user } = useContext(AuthContext);
@@ -17,9 +18,6 @@ export default function PostCard(props) {
     comments
   } = props.post; // destructuring data from props
 
-  const toggleLikePost = () => {
-    console.log("post liked");
-  };
   const PostComment = () => {
     console.log("post comment");
   };
@@ -39,15 +37,8 @@ export default function PostCard(props) {
           <Card.Description>{body}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button as="div" labelPosition="right" onClick={toggleLikePost}>
-            <Button color="teal" basic>
-              <Icon name="heart" />
-            </Button>
-            <Label basic color="teal" pointing="left">
-              {likeCount}
-            </Label>
-          </Button>
-          <Button as="div" labelPosition="right" as={Link} to={`/posts/${id}`}>
+          <LikeButton post={{ id, likes, likeCount }} />
+          <Button labelPosition="right" as={Link} to={`/posts/${id}`}>
             <Button color="violet" basic>
               <Icon name="comments" />
             </Button>

@@ -23,7 +23,7 @@ export default function Home() {
         {loading ? (
           <h1>Loading...</h1>
         ) : (
-          <Transition.Group duration={300}>
+          <Transition.Group duration={200}>
             {posts.map(post => (
               <Grid.Column key={post.id} style={{ marginBottom: "1.2rem" }}>
                 <PostCard post={post}></PostCard>
