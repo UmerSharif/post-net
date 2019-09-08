@@ -10,14 +10,17 @@ import DeleteButton from "../components/DeleteButton";
 export default function SinglePost(props) {
   const { user } = useContext(AuthContext);
   const postId = props.match.params.postId;
-  console.log(postId);
 
   const {
     data: { getPost }
   } = useQuery(FETCH_SINGLEPOST, {
     variables: { postId }
   });
-  console.log("single post for this is getPost:" + getPost);
+
+  function redirectToHome() {
+    props.history.push("/");
+  }
+
   let postMarkup;
   if (!getPost) {
     postMarkup = <p>Loading.....!</p>; //TODO: Add spinner
@@ -32,6 +35,7 @@ export default function SinglePost(props) {
       likes,
       comments
     } = getPost;
+
     postMarkup = (
       <Grid>
         <Grid.Row>
@@ -43,7 +47,7 @@ export default function SinglePost(props) {
             />
           </Grid.Column>
           <Grid.Column width={10}>
-            <Card Fluid>
+            <Card fluid>
               <Card.Content>
                 <Card.Header>{username}</Card.Header>
                 <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
@@ -51,10 +55,7 @@ export default function SinglePost(props) {
               </Card.Content>
               <hr></hr>
               <Card.Content extra>
-                <LikeButton
-                  user={user}
-                  post={{ id, likes, likeCount }}
-                ></LikeButton>
+                <LikeButton user={user} post={{ id, likeCount, likes }} />
                 <Button
                   as="div"
                   labelPosition="left"
@@ -63,10 +64,15 @@ export default function SinglePost(props) {
                   <Button basic color="violet">
                     <Icon name="comments"></Icon>
                   </Button>
-                  <Label basic color="violet" pointing="left"></Label>
+                  <Label basic color="violet" pointing="left">
+                    {commentCount}
+                  </Label>
                 </Button>
                 {user && user.username === username && (
-                  <DeleteButton postId={id} />
+                  <DeleteButton
+                    postId={id}
+                    callBackToDelButton={redirectToHome}
+                  />
                 )}
               </Card.Content>
             </Card>
@@ -88,6 +94,7 @@ const FETCH_SINGLEPOST = gql`
       likes {
         username
       }
+      likeCount
       commentCount
       comments {
         id
