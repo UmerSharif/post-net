@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { gql } from "apollo-boost";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import {
@@ -18,6 +18,7 @@ import DeleteButton from "../components/DeleteButton";
 export default function SinglePost(props) {
   const { user } = useContext(AuthContext);
   const [comment, setComment] = useState("");
+  const commentInputRef = useRef(null);
   const postId = props.match.params.postId;
 
   const {
@@ -30,6 +31,7 @@ export default function SinglePost(props) {
     update(proxy) {
       //empty state after submitting
       setComment("");
+      commentInputRef.current.blur();
     },
     variables: { postId, body: comment }
   });
@@ -122,6 +124,7 @@ export default function SinglePost(props) {
                       className="ui button teal"
                       disabled={comment.trim() === ""}
                       onClick={createComment}
+                      ref={commentInputRef}
                     >
                       Comment
                     </button>
