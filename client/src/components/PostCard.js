@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Card, Icon, Label, Image, Button } from "semantic-ui-react";
+import { Card, Icon, Label, Image, Button, Popup } from "semantic-ui-react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -29,7 +29,7 @@ export default function PostCard(props) {
           <Image
             floated="right"
             size="mini"
-            src="https://react.semantic-ui.com/images/avatar/large/jenny.jpg"
+            src="https://react.semantic-ui.com/images/avatar/large/jenny.jpg" //TODO: image upload cloudanary
           />
           <Card.Header>{username}</Card.Header>
           <Card.Meta as={Link} to={`/posts/${id}`}>
@@ -39,14 +39,21 @@ export default function PostCard(props) {
         </Card.Content>
         <Card.Content extra>
           <LikeButton post={{ id, likes, likeCount }} />
-          <Button labelPosition="right" as={Link} to={`/posts/${id}`}>
-            <Button color="violet" basic>
-              <Icon name="comments" />
-            </Button>
-            <Label basic color="violet" pointing="left">
-              {commentCount}
-            </Label>
-          </Button>
+          <Popup
+            content="Comment on post"
+            inverted
+            trigger={
+              <Button labelPosition="right" as={Link} to={`/posts/${id}`}>
+                <Button color="violet" basic>
+                  <Icon name="comments" />
+                </Button>
+                <Label basic color="violet" pointing="left">
+                  {commentCount}
+                </Label>
+              </Button>
+            }
+          />
+
           {user && user.username === username && (
             <DeleteButton postId={id}></DeleteButton>
           )}

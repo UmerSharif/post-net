@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Icon, Label, Button } from "semantic-ui-react";
+import { Icon, Label, Button, Popup } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Link } from "react-router-dom";
@@ -30,21 +30,28 @@ export default function LikeButton({ post: { id, likes, likeCount } }) {
         first it checks if user is logged in, next it checks the boolean "liked"for true or false
         which display the button types based on its value. in the next ternary block we chain the earlier user
         and display the button type when the user is not loggedin.  */}
-      {user ? (
-        liked ? (
-          <Button color="teal">
-            <Icon name="heart" />
-          </Button>
-        ) : (
-          <Button color="teal" basic>
-            <Icon name="heart" />
-          </Button>
-        )
-      ) : (
-        <Button as={Link} to="/login" color="teal" basic>
-          <Icon name="heart" />
-        </Button>
-      )}
+      <Popup
+        content={liked ? "Unlike" : "Like"}
+        inverted
+        trigger={
+          user ? (
+            liked ? (
+              <Button color="teal">
+                <Icon name="heart" />
+              </Button>
+            ) : (
+              <Button color="teal" basic>
+                <Icon name="heart" />
+              </Button>
+            )
+          ) : (
+            <Button as={Link} to="/login" color="teal" basic>
+              <Icon name="heart" />
+            </Button>
+          )
+        }
+      />
+
       <Label basic color="teal" pointing="left">
         {likeCount}
       </Label>

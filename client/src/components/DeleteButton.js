@@ -6,7 +6,8 @@ import {
   Button,
   Icon,
   Label,
-  Confirm
+  Confirm,
+  Popup
 } from "semantic-ui-react";
 
 import { gql } from "apollo-boost";
@@ -44,15 +45,22 @@ export default function DeleteButton({
 
   return (
     <React.Fragment>
-      <Button
-        as="div"
-        color="red"
-        basic
-        floated="right"
-        onClick={() => setConfirm(true)}
-      >
-        <Icon name="trash alternate" style={{ margin: 0 }} />
-      </Button>
+      <Popup
+        content={commentId ? "Delete Comment" : "Delete Post"}
+        inverted
+        trigger={
+          <Button
+            as="div"
+            color="red"
+            basic
+            floated="right"
+            onClick={() => setConfirm(true)}
+          >
+            <Icon name="trash alternate" style={{ margin: 0 }} />
+          </Button>
+        }
+      />
+
       <Confirm
         open={confirm}
         onCancel={() => setConfirm(false)}
