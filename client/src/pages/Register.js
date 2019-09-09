@@ -5,6 +5,7 @@ import "./Register.css";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 import { AuthContext } from "../context/AuthContext";
+import ImageUpload from '../components/ImageUpload'
 
 //custom hooks
 import { useFormHook } from "../utils/FormHook";
@@ -95,6 +96,7 @@ export default function Register(props) {
           </ul>
         </div>
       )}
+      <ImageUpload />
     </div>
   );
 }
