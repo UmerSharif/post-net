@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-	"start": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +16,8 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.6.11"
+    "mongoose": "^5.6.11",
+	"nodemon": "^1.19.2"
   },
   "devDependencies": {
     "@playlyfe/gql": "^2.6.2",
