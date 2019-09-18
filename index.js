@@ -25,29 +25,3 @@ mongoose
     console.log(`Server running at port ${port}`);
   });
 
-//test
-/* const typeDefs = gql`
-  type Post {
-    id: ID!
-    body: String!
-    username: String!
-    createdAt: String!
-  }
-  type Query {
-    getPosts: [Post]
-  }
-`; */
-
-/* const resolvers = {
-  Query: {
-    getPosts: async () => {
-      try {
-        const posts = await Post.find();
-        return posts;
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }
-}; */
-//test
