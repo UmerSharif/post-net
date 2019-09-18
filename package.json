@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    
     "start": "nodemon index.js"
-	
   },
   "keywords": [],
   "author": "",
@@ -22,6 +20,6 @@
   },
   "devDependencies": {
     "@playlyfe/gql": "^2.6.2",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.2"
   }
 }
